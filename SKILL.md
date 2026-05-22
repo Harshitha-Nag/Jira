@@ -9,9 +9,9 @@ Create a Jira issue in the EGU (EG Utility Cloud) project.
 **Arguments**: $ARGUMENTS
 
 ## Usage Examples
-- `/egu-jira Bug Meter reading fails on null value`
-- `/egu-jira Story Add export to CSV on consumption report`
-- `/egu-jira Task Upgrade NuGet packages to latest stable`
+- `/jira Bug Login fails on SSP`
+- `/jira Story Add Login Page to SSP`
+- `/jira Task Update dependencies`
 
 ## Workflow
 
