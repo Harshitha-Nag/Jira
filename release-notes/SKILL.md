@@ -120,9 +120,9 @@ h2. Impact
 - Use bullet points for lists within sections
 - Number steps in "How It Works"
 - Derive content from: User Story, Business Context, Feature Description, User Flow, Key Benefits, Acceptance Criteria
+- Use Jira wiki markup (h2., *, #, {note}, etc.)
 
 ### DON'T:
-- Use Jira wiki markup (h2., *, #, {note}, etc.)
 - Mention internal field names, custom field IDs, or Figma links
 - Include acceptance criteria verbatim
 - Mention items that are explicitly "Out of Scope" in the story (unless user-relevant)
