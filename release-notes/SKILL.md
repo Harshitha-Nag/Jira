@@ -57,7 +57,7 @@ Use `jira_update_issue` with:
 **Field reference:**
 | Field | Field ID | Value |
 |-------|----------|-------|
-| Client Release Notes | customfield_10200 | Generated release notes (plain text, no wiki markup) |
+| Client Release Notes | customfield_10200 | Generated release notes (plain text, jira wiki markup) |
 | Include in client release notes | customfield_10211 | `Yes` |
 
 ### 6. Report Result
@@ -115,7 +115,6 @@ h2. Impact
 
 ### DO:
 - Write in formal, professional, client-friendly language
-- Use plain text only — no Jira wiki markup (no h2., *, #, {note}, etc.)
 - Write for end users/clients, not developers
 - Use bullet points for lists within sections
 - Number steps in "How It Works"
