@@ -33,7 +33,7 @@ Use AskUserQuestion to collect all fields upfront:
 
 **Do NOT ask for:**
 - Component — ask the user to pick from: `Customer Self-service Portal for B2C and SME`, `Partner Portal`. If neither fits, omit entirely.
-- ERP Activity — not used in EGU
+- ERP Activity — manually updated in EGU
 - Team — always auto-filled as `Team Nova`
 - AI-generated — always auto-filled as `Yes`
 
@@ -210,13 +210,32 @@ As a [type of user],
 I want [goal],
 So that [benefit].
 
+h2. Business Context
+[Why this feature is needed]
+[Business value]
+[Problem being solved]
+
 h2. Feature Description
 [What needs to be built — detailed developer instructions]
 
+h2. User Flow
+1. User does X
+2. System displays Y
+3. User selects Z
+4. System performs action
+
+h2. UI/UX Requirements
+* Page/Screen:
+* Components:
+* Validation Rules:
+* Error Messages:
+* Accessibility Requirements:
+* Responsive Behaviour:
+
 h2. Acceptance Criteria
-* [] Criterion 1
-* [] Criterion 2
-* [] Criterion 3
+* Criterion 1
+* Criterion 2
+* Criterion 3
 
 h2. Out of Scope
 [What is explicitly NOT included in this story]
