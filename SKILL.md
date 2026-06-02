@@ -1,8 +1,7 @@
----
 name: egu-jira
 argument-hint: [issue-type] [summary]
 description: Create a Jira issue (Bug, Story, Task) in EGU (EG Utility Cloud) project. Use when creating bugs, filing stories, or making tasks in the EGU project.
----
+
 
 Create a Jira issue in the EGU (EG Utility Cloud) project.
 
