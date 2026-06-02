@@ -74,38 +74,38 @@ Always generate release notes using the following structure.
 Each section must be present. If a section is not applicable, write "N/A" for that section.
 
 ```
-Release Notes – [Story Summary]
+h2. Release Notes – [Story Summary]
 
-Overview
+h2. Overview
 [1–2 sentences describing what this release is about and which product/area it affects.]
 
-What's New
+h2. What's New
 [Bullet points listing the new features or changes introduced. Focus on what the user sees and can do.]
 - [New feature or change 1]
 - [New feature or change 2]
 - [New feature or change 3]
 
-User Access & Permissions
+h2. User Access & Permissions
 [Describe who can access this feature — all users, specific roles, authenticated users only, etc.]
 
-How It Works
+h2. How It Works
 [Step-by-step description of how the user interacts with the new feature. Written in plain language.]
 1. [Step 1]
 2. [Step 2]
 3. [Step 3]
 
-Key Benefits
+h2. Key Benefits
 [Bullet points highlighting the value and benefits to the user.]
 - [Benefit 1]
 - [Benefit 2]
 - [Benefit 3]
 
-Important Notes
+h2. Important Notes
 [Any limitations, exclusions, or things the user should be aware of. Include items from "Out of Scope" where relevant to the user.]
 - [Note 1]
 - [Note 2]
 
-Impact
+h2. Impact
 [Describe the impact on the user experience, business process, or system. Who is affected and how.]
 ```
 
