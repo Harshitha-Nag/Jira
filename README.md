@@ -1,132 +1,98 @@
-# 🛠️ EGU Jira Skill — `egu-jira`
+# EGU Claude Slash Commands
 
-A Claude skill for creating Jira issues in the **EG Utility Cloud (EGU)** project. It enables fast, consistent story/bug/task creation with all required EGU-specific fields auto-filled — including support for Figma design context.
-
----
-
-## 📦 What It Does
-
-- Creates **Stories, Bugs, and Tasks** in the EGU Jira project
-- Auto-fills all EGU-specific custom fields (Team, AI-generated, Labels, Security, etc.)
-- Generates structured descriptions using Jira wiki markup templates
-- Supports **Figma design integration** — fetch a design and generate a story from it
-- Links issues to Epics after creation
-- Shows a draft for confirmation before creating the ticket
+AI-powered slash commands for the **EG Utility Cloud (EGU)** project. These templates are used with Claude to streamline Jira issue creation and client release note generation.
 
 ---
 
-## 🚀 Usage
+## Commands
 
-### Via command:
+### `/egu-jira` — Create a Jira Issue
+
+Creates a Bug, Story, or Task in the EGU Jira project with all required fields pre-filled.
+
+**Usage**
+
 ```
-/egu-jira Story Add Login Page to SSP
+/egu-jira [issue-type] [summary]
+```
+
+**Examples**
+
+```
 /egu-jira Bug Login fails on SSP
+/egu-jira Story Add Login Page to SSP
 /egu-jira Task Update dependencies
 ```
 
-### Via natural language:
-Just describe a feature — the agent treats it as a story creation request automatically.
+**What it does**
 
-```
-"Create a login user story for SSP"
-"We need a dashboard page for consumption tracking"
-```
+- Prompts for description, priority, and optional epic link
+- Auto-fills team (`Team Nova`), labels (`AI_Story`), data classification, change type, and threat risk
+- Formats the description using Jira wiki markup templates for Bug / Story / Task
+- Links the issue to an epic if provided
+- Returns the created issue key and URL
 
-### With Figma design:
-```
-"Fetch the design from this Figma URL and create a user story"
-```
+**Auto-filled fields by issue type**
 
----
-
-## 📋 Supported Issue Types
-
-| Type | Issue Category | Threat Risk |
-|------|---------------|-------------|
-| Story | New features and functionality | 0 - None |
-| Bug | Maintenance and defects | 1 - Low |
-| Task | Technical debt | 0 - None |
+| Field | Bug | Story | Task |
+|---|---|---|---|
+| Issue Category | Maintenance and defects | New features and functionality | Technical debt |
+| Threat Risk | 1 - Low | 0 - None | 0 - None |
+| Team Name | Team Nova | Team Nova | Team Nova |
+| AI-generated | Yes | Yes | Yes |
+| Labels | AI_Story | AI_Story | AI_Story |
+| Security Level | ALL EG | ALL EG | ALL EG |
 
 ---
 
-## 🔧 Auto-filled Fields
+### `/egu-release-notes` — Generate Client Release Notes
 
-These fields are always set automatically — you never need to provide them:
+Fetches a Jira story, generates formal client-facing release notes, and updates the ticket.
 
-| Field | Value |
-|-------|-------|
-| Project | `EGU` |
-| Team | `Team Nova` |
-| AI-generated | `Yes` |
-| Labels | `AI_Story` |
-| Change Type | `1 - Normal` |
-| Data Classification | `2 - Normal data - INTERNAL` |
-| Security Level | `ALL EG` (default) |
+**Usage**
+
+```
+/egu-release-notes [jira-issue-key]
+```
+
+**Examples**
+
+```
+/egu-release-notes EGU-3191
+/egu-release-notes EGU-1234
+```
+
+**What it does**
+
+- Fetches the story summary and description from Jira
+- Generates structured, client-friendly release notes in EGU format
+- Shows a draft for review before updating
+- Updates `Client Release Notes` (customfield_10200) on the ticket
+- Sets `Include in client release notes` to `Yes` (customfield_10211)
+
+**Release notes sections**
+
+Every generated document includes: Overview, What's New, User Access & Permissions, How It Works, Key Benefits, Important Notes, and Impact. Sections not applicable are marked `N/A`.
 
 ---
 
-## ❓ Fields You'll Be Asked For
+## Project Details
 
-| Field | Required | Notes |
-|-------|----------|-------|
-| Summary | ✅ Yes | Pre-filled from your command/description |
-| Priority | ✅ Yes | Highest / High / Medium / Low / Lowest |
-| Epic Link | ❌ Optional | Format: `EGU-#####` |
-| Component | ❌ Optional | `Customer Self-service Portal for B2C and SME` or `Partner Portal` |
-| Security Level | ❌ Conditional | Only asked if attachments or personal data are mentioned |
-
----
-
-## 📝 Description Templates
-
-### Story
-```
-h2. User Story
-h2. Business Context
-h2. Feature Description
-h2. User Flow
-h2. UI/UX Requirements
-h2. Acceptance Criteria
-h2. Out of Scope
-```
-
-### Bug
-```
-h2. Problem
-h2. Affected Files
-h2. Impact
-h2. Suggested Fix
-```
-
-### Task
-```
-h2. Description
-h2. Scope
-h2. Done When
-```
+| Setting | Value |
+|---|---|
+| Jira Project | EGU (EG Utility Cloud) |
+| Issue URL pattern | `https://jira.eg.dk/browse/EGU-#####` |
+| Default team | Team Nova |
+| Default security level | ALL EG |
+| Labels always applied | `AI_Story` |
+| AI-generated field | Always set to `Yes` |
 
 ---
 
-## 🔗 Ticket URL Format
+## Notes
 
-```
-https://jira.eg.dk/browse/EGU-#####
-```
-
----
-
-## ⚠️ Important Notes
-
-- **No Subtasks** — EGU does not use the Subtask issue type
-- **No ERP Activity** — not used in EGU, never ask or include
-- **Custom field format** — SELECT fields are passed as plain strings, not `{"value": "..."}` objects
-- **Epic linking** — done via `jira_link_to_epic` after issue creation, not as a parent field
-- **Wiki markup** — descriptions use Jira wiki markup, not Markdown
-
----
-
-## 📁 Skill Location
-
-```
-https://raw.githubusercontent.com/Harshitha-Nag/Jira/main/SKILL.md
-```
+- **No subtasks** — EGU does not use the Subtask issue type.
+- **Components** — Optional. Valid values: `Customer Self-service Portal for B2C and SME` or `Partner Portal`. Only included when relevant.
+- **Security level** — Defaults to `ALL EG`. Escalated to `EU GDPR` only when attachments or personal data are involved.
+- **Custom fields** — All select fields are passed as plain strings, not `{"value": "..."}` objects.
+- **Release notes** — A draft is always shown for confirmation before the Jira ticket is updated.
