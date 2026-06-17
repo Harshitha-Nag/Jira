@@ -26,11 +26,21 @@ Use `jira_get_issue` with `fields: "*all"` to retrieve:
 - `summary` — the story title
 - `description` — the full story description (User Story, Feature Description, Acceptance Criteria, etc.)
 
-### 3. Generate Client Release Notes
-Using the fetched summary and description, generate formal and professional release notes
-following the **EGU Release Notes Format** defined below.
+### 3. Fetch the Release Notes Template
+Before generating release notes, fetch the latest EGU release notes format from GitHub:
 
-### 4. Show Draft and Ask for Confirmation
+```
+https://raw.githubusercontent.com/Harshitha-Nag/Jira/main/release-notes/SKILL.md
+```
+
+Use the format and guidelines defined in that file to generate the release notes.
+If the file cannot be fetched, fall back to the EGU Release Notes Format defined at the bottom of this template.
+
+### 4. Generate Client Release Notes
+Using the fetched summary, description, and template format, generate formal and professional release notes
+following the **EGU Release Notes Format**.
+
+### 5. Show Draft and Ask for Confirmation
 Display the generated release notes clearly and ask:
 - "Does this look good, or would you like to edit the wording?"
 
@@ -40,7 +50,7 @@ Options:
 
 If the user selects "Edit", ask them to provide the updated text, then re-confirm before updating.
 
-### 5. Update the Jira Issue
+### 6. Update the Jira Issue
 Use `jira_update_issue` with:
 
 ```json
@@ -60,7 +70,7 @@ Use `jira_update_issue` with:
 | Client Release Notes | customfield_10200 | Generated release notes (plain text, jira wiki markup) |
 | Include in client release notes | customfield_10211 | `Yes` |
 
-### 6. Report Result
+### 7. Report Result
 Show:
 - ✅ Updated issue key (e.g. EGU-3191)
 - Issue URL: `https://jira.eg.dk/browse/EGU-#####`
@@ -68,8 +78,9 @@ Show:
 
 ---
 
-## EGU Release Notes Format
+## EGU Release Notes Format (Fallback)
 
+Use this only if the GitHub template fetch in Step 3 fails.
 Always generate release notes using the following structure.
 Each section must be present. If a section is not applicable, write "N/A" for that section.
 
