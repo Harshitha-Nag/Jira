@@ -1,6 +1,6 @@
 name: egu-jira
 argument-hint: [issue-type] [summary]
-description: Create a Jira issue (Bug, Story, Task) in EGU (EG Utility Cloud) project. Use when creating bugs, filing stories, or making tasks in the EGU project.
+description: Create a Jira issue (Bug, Story, Task, Spike) in EGU (EG Utility Cloud) project. Use when creating bugs, creating Spike, filing stories, or making tasks in the EGU project.
 
 Create a Jira issue in the EGU (EG Utility Cloud) project.
 
@@ -10,12 +10,13 @@ Create a Jira issue in the EGU (EG Utility Cloud) project.
 - `/jira Bug Login fails on SSP`
 - `/jira Story Add Login Page to SSP`
 - `/jira Task Update dependencies`
+- `/jira Spike to investigate`
 
 ## Workflow
 
 ### 1. Parse Arguments
 Extract issue type and summary from arguments:
-- First word should be issue type (Bug, Story, Task)
+- First word should be issue type (Bug, Story, Task, Spike)
 - Remaining text is the summary
 - If no type specified, ask using AskUserQuestion
 - If no summary, ask using AskUserQuestion
@@ -57,11 +58,11 @@ ToolSearch: select:mcp__mcp-jira-service__jira_link_to_epic
 ### 4. Create Issue
 Use `mcp__mcp-jira-service__jira_create_issue` with:
 
-**For Bug/Story/Task:**
+**For Bug/Story/Task/Spike:**
 ```json
 {
   "project_key": "EGU",
-  "issue_type": "[Bug|Story|Task]",
+  "issue_type": "[Bug|Story|Task|Spike]",
   "summary": "[User-provided summary]",
   "description": "[User-provided description in Jira wiki markup]",
   "additional_fields": {
@@ -110,7 +111,7 @@ Show:
 | Threat Risk | customfield_10210 | `1 - Low` |
 | Team Name | customfield_10216 | `Team Nova` |
 | AI-generated | customfield_14600 | `Yes` |
-| Labels | labels | `AI_Story` |
+| Labels | labels | `Claude` |
 | Security Level | security | `ALL EG` |
 
 ### Story
@@ -122,7 +123,7 @@ Show:
 | Threat Risk | customfield_10210 | `0 - None` |
 | Team Name | customfield_10216 | `Team Nova` |
 | AI-generated | customfield_14600 | `Yes` |
-| Labels | labels | `AI_Story` |
+| Labels | labels | `Claude` |
 | Security Level | security | `ALL EG` |
 
 ### Task
@@ -134,7 +135,19 @@ Show:
 | Threat Risk | customfield_10210 | `0 - None` |
 | Team Name | customfield_10216 | `Team Nova` |
 | AI-generated | customfield_14600 | `Yes` |
-| Labels | labels | `AI_Story` |
+| Labels | labels | `Claude` |
+| Security Level | security | `ALL EG` |
+
+### Spike
+| Field | Field ID | Value |
+|-------|----------|-------|
+| Issue Category | customfield_10213 | `New features and functionality` |
+| Change Type | customfield_11200 | `1 - Normal` |
+| Data Classification | customfield_11201 | `2 - Normal data - INTERNAL` |
+| Threat Risk | customfield_10210 | `0 - None` |
+| Team Name | customfield_10216 | `Team Nova` |
+| AI-generated | customfield_14600 | `Yes` |
+| Labels | labels | `Claude` |
 | Security Level | security | `ALL EG` |
 
 ---
@@ -252,6 +265,20 @@ h2. Done When
 [Completion criteria]
 ```
 
+### For Spike
+```
+h2. Description
+[What needs to be done]
+
+h2. Scope
+* Item 1
+* Item 2
+
+h2. Done When
+[Completion criteria]
+```
+
+
 ---
 
 ## Error Handling
@@ -273,7 +300,7 @@ If creation fails:
 - **Component**: Optional — ask user only if relevant; valid values are `Customer Self-service Portal for B2C and SME` or `Partner Portal`
 - **ERP Activity**: Not used in EGU — do not ask or include
 - **Team Name**: Always `Team Nova` (customfield_10216) — never ask
-- **Labels**: Always set to `["AI_Story"]` — never ask, always include
+- **Labels**: Always set to `["Claude"]` — never ask, always include
 - **AI-generated**: Always `Yes` (customfield_14600) — never ask, always set
 - **Epic linking**: Use `jira_link_to_epic` AFTER creation (not a parent field)
 - **Security Level**: Default to `ALL EG`; ask only if attachments or sensitive data are mentioned
