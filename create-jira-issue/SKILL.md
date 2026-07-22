@@ -72,7 +72,7 @@ Use `mcp__mcp-jira-service__jira_create_issue` with:
     "customfield_10210": "[Threat Risk — see defaults below]",
     "customfield_10216": "Team Nova",
     "customfield_14600": "Yes",
-    "labels": ["AI_Story"],
+    "labels": ["Claude"],
     "priority": { "name": "[User-selected priority]" },
     "security": { "name": "ALL EG" }
   }
